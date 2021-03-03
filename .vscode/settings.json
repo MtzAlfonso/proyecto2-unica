@@ -1,8 +1,25 @@
 {
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.formatting.autopep8Path": "env/bin/autopep8",
-  "python.formatting.yapfPath": "env/bin/yapf",
-  "python.formatting.provider": "yapf",
-  "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.autopep8Path": "env/bin/autopep8",
+    "python.formatting.yapfPath": "env/bin/yapf",
+    "python.formatting.provider": "yapf",
+    "python.linting.pylintUseMinimalCheckers": false,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#3c84bf",
+        "activityBar.activeBorder": "#ffe873",
+        "activityBar.background": "#3c84bf",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#ffe873",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#306998",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#3c84bf",
+        "titleBar.activeBackground": "#306998",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#30699899",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#306998"
 }
