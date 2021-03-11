@@ -4,21 +4,25 @@
     "python.formatting.autopep8Path": "env/bin/autopep8",
     "python.formatting.yapfPath": "env/bin/yapf",
     "python.formatting.provider": "yapf",
+    "python.linting.pylintArgs": [
+        "--extension-pkg-whitelist=pygame"
+    ],
     "python.linting.pylintUseMinimalCheckers": false,
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#3c84bf",
-        "activityBar.activeBorder": "#ffe873",
-        "activityBar.background": "#3c84bf",
+        "activityBar.activeBackground": "#1f6fd0",
+        "activityBar.activeBorder": "#ee90bb",
+        "activityBar.background": "#1f6fd0",
         "activityBar.foreground": "#e7e7e7",
         "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#ffe873",
+        "activityBarBadge.background": "#ee90bb",
         "activityBarBadge.foreground": "#15202b",
-        "statusBar.background": "#306998",
+        "statusBar.background": "#1857a4",
         "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#3c84bf",
-        "titleBar.activeBackground": "#306998",
+        "statusBarItem.hoverBackground": "#1f6fd0",
+        "titleBar.activeBackground": "#1857a4",
         "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#30699899",
+        "titleBar.inactiveBackground": "#1857a499",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
+    "peacock.color": "#1857a4",
 }
