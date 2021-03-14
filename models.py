@@ -27,10 +27,11 @@ class Goku():
         estado del personaje si esta muerto o no, y la velocidad de salto.
         """
         self.images, self.rect = fn.load_sprite_sheet(
-            'goku_3.png', 5, 1, sizex, sizey, -1)
+            'goku.png', 5, 1, sizex, sizey, -1)
         self.images1, self.rect1 = fn.load_sprite_sheet(
-            'dino_ducking.png', 2, 1, 59, sizey, -1)
+            'goku_ducking.png', 2, 1, sizex, sizey, -1)
         self.rect.bottom = int(0.98*var.height)
+        self.rect1.bottom = int(0.99*var.height)
         self.rect.left = var.width/15
         self.image = self.images[0]
         self.index = 0
@@ -158,8 +159,8 @@ class Energy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
 
         self.images, self.rect = fn.load_sprite_sheet(
-            'ptera.png', 2, 1, sizex, sizey, -1)
-        self.energy_height = [var.height*0.9, var.height*0.8, var.height*0.7]
+            'energy.png', 2, 1, sizex, sizey, -1)
+        self.energy_height = [var.height*0.9, var.height*0.7, var.height*0.65]
         self.rect.centery = self.energy_height[random.randrange(0, 3)]
         self.rect.left = var.width + self.rect.width
         self.image = self.images[0]
@@ -288,7 +289,7 @@ class Scoreboard():
         Metodo que actualiza el marcador en pantalla
         """
         score_digits = fn.extract_digits(score)
-        self.image.fill(var.background_col)
+        self.image.fill(var.violet)
         for digits in score_digits:
             self.image.blit(self.tempimages[digits], self.temprect)
             self.temprect.left += self.temprect.width

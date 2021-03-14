@@ -23,6 +23,7 @@ GRAVITY = 0.6
 HIGH_SCORE = 0
 black = (0, 0, 0)
 white = (255, 255, 255)
+violet = (193, 89, 166)
 background_col = (218, 126, 0)
 
 #creamos una ventana que recibe las proporciones anteriores

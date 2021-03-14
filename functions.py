@@ -124,11 +124,6 @@ def introscreen():
     logo_rect.centerx = var.width*0.25
     logo_rect.centery = var.height*0.5
 
-    temp_ground, temp_ground_rect = load_sprite_sheet(
-        'ground.png', 15, 1, -1, -1, -1)
-    temp_ground_rect.left = var.width/20
-    temp_ground_rect.bottom = var.height
-
     callout, callout_rect = load_image('call_out.png', 300, 80, -1)
     callout_rect.left = var.width*0.5
     callout_rect.top = var.height*0.05
@@ -159,7 +154,6 @@ def introscreen():
         if pygame.display.get_surface() is not None:
             var.screen.fill(var.background_col)
             var.screen.blit(shenron, shenron_rect)
-            var.screen.blit(temp_ground[0], temp_ground_rect)
             if temp_goku.is_blinking:
                 var.screen.blit(logo, logo_rect)
                 var.screen.blit(callout, callout_rect)
@@ -203,7 +197,7 @@ def gameplay():
         'numbers.png', 12, 1, 11, int(11*6/5), -1)
     hi_image = pygame.Surface((22, int(11*6/5)))
     hi_rect = hi_image.get_rect()
-    hi_image.fill(var.background_col)
+    hi_image.fill(var.violet)
     hi_image.blit(temp_images[10], temp_rect)
     temp_rect.left += temp_rect.width
     hi_image.blit(temp_images[11], temp_rect)
