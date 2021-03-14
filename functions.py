@@ -1,9 +1,12 @@
 """
+Script con funciones auxiliares.
+
 Autores:
         - David Hernadez Rivera
         - J. Alfonso Martínez Baeza
         - M. Yvette Santana Sanchez
 """
+
 import os # Permite ejecutar funciones del sistema operativo
 import sys # Permite ejecutar funciones del sistema operativo
 import random # Nos permite ejecutar funciones que requieren metodos aleatorios
@@ -18,7 +21,7 @@ def load_image(
     colorkey=None,
 ):
     """
-    Fun
+    Funcion auxiliar para cargar imagenes
     """
     fullname = os.path.join('images', name)
     image = pygame.image.load(fullname).convert_alpha()
@@ -35,12 +38,15 @@ def load_image(
 
 def load_sprite_sheet(
         sheetname,
-        nx,
-        ny,
+        n_x,
+        n_y,
         scalex=-1,
         scaley=-1,
         colorkey=None,
 ):
+    """
+    Funcion auxiliar para cargar hojas de sprites.
+    """
     fullname = os.path.join('images', sheetname)
     sheet = pygame.image.load(fullname)
     sheet = sheet.convert_alpha()
@@ -49,11 +55,11 @@ def load_sprite_sheet(
 
     sprites = []
 
-    sizex = sheet_rect.width/nx
-    sizey = sheet_rect.height/ny
+    sizex = sheet_rect.width/n_x
+    sizey = sheet_rect.height/n_y
 
-    for i in range(0, ny):
-        for j in range(0, nx):
+    for i in range(0, n_y):
+        for j in range(0, n_x):
             rect = pygame.Rect((j*sizex, i*sizey, sizex, sizey))
             image = pygame.Surface(rect.size)
             image = image.convert_alpha()
@@ -75,6 +81,9 @@ def load_sprite_sheet(
 
 
 def disp_game_over_msg(retbutton_image, game_over_image):
+    """
+    Muestra el mensaje de Game Over en pantalla.
+    """
     retbutton_rect = retbutton_image.get_rect()
     retbutton_rect.centerx = var.width / 2
     retbutton_rect.top = var.height*0.52
@@ -88,6 +97,9 @@ def disp_game_over_msg(retbutton_image, game_over_image):
 
 
 def extract_digits(number):
+    """
+    Extracción de los digitos del puntaje.
+    """
     if number > -1:
         digits = []
         while number/10 != 0:
@@ -101,8 +113,11 @@ def extract_digits(number):
         return digits
 
 def introscreen():
-    temp_dino = md.Goku(69, 72)
-    temp_dino.is_blinking = True
+    """
+    Función para dibujar la pantalla de inicio
+    """
+    temp_goku = md.Goku(69, 72)
+    temp_goku.is_blinking = True
     game_start = False
 
     logo, logo_rect = load_image('logo.png', 240, 159, -1)
@@ -128,50 +143,55 @@ def introscreen():
             return True
 
         for event in pygame.event.get():
+            #esperando el evento de salir
             if event.type == pygame.QUIT:
                 return True
             if event.type == pygame.KEYDOWN:
+                # esperando el evento de teclado de espacio,
+                # arriba y abajo para el movimiento del personaje
                 if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
-                    temp_dino.is_jumping = True
-                    temp_dino.is_blinking = False
-                    temp_dino.movement[1] = -1*temp_dino.jump_speed
+                    temp_goku.is_jumping = True
+                    temp_goku.is_blinking = False
+                    temp_goku.movement[1] = -1*temp_goku.jump_speed
 
-        temp_dino.update()
+        temp_goku.update()
 
         if pygame.display.get_surface() is not None:
             var.screen.fill(var.background_col)
             var.screen.blit(shenron, shenron_rect)
             var.screen.blit(temp_ground[0], temp_ground_rect)
-            if temp_dino.is_blinking:
+            if temp_goku.is_blinking:
                 var.screen.blit(logo, logo_rect)
                 var.screen.blit(callout, callout_rect)
-            temp_dino.draw()
+            temp_goku.draw()
 
             pygame.display.update()
 
         var.clock.tick(var.FPS)
-        if temp_dino.is_jumping is False and temp_dino.is_blinking is False:
+        if temp_goku.is_jumping is False and temp_goku.is_blinking is False:
             game_start = True
 
 
 def gameplay():
-    #global var.HIGH_SCORE
+    """
+    En esta función se define el comportamiento de todos los objetos.
+    """
     gamespeed = 5
     start_menu = False
     game_over = False
     game_quit = False
-    player_dino = md.Goku(69, 72)
+    player_goku = md.Goku(69, 72)
     new_ground = md.Ground(-1*gamespeed)
     scb = md.Scoreboard()
     highsc = md.Scoreboard(var.width*0.78)
     counter = 0
 
-    cacti = pygame.sprite.Group()
+    saibamen = pygame.sprite.Group()
     energies = pygame.sprite.Group()
     clouds = pygame.sprite.Group()
     last_obstacle = pygame.sprite.Group()
 
-    md.Cactus.containers = cacti
+    md.Saibaman.containers = saibamen
     md.Energy.containers = energies
     md.Cloud.containers = clouds
 
@@ -206,43 +226,43 @@ def gameplay():
 
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
-                            if player_dino.rect.bottom == int(0.98*var.height):
-                                player_dino.is_jumping = True
+                            if player_goku.rect.bottom == int(0.98*var.height):
+                                player_goku.is_jumping = True
                                 if pygame.mixer.get_init() is not None:
                                     var.jump_sound.play()
-                                player_dino.movement[1] = - \
-                                    1*player_dino.jump_speed
+                                player_goku.movement[1] = - \
+                                    1*player_goku.jump_speed
 
                         if event.key == pygame.K_DOWN:
-                            if not (player_dino.is_jumping and player_dino.is_dead):
-                                player_dino.is_ducking = True
+                            if not (player_goku.is_jumping and player_goku.is_dead):
+                                player_goku.is_ducking = True
 
                     if event.type == pygame.KEYUP:
                         if event.key == pygame.K_DOWN:
-                            player_dino.is_ducking = False
-            for cactus in cacti:
-                cactus.movement[0] = -1*gamespeed
-                if pygame.sprite.collide_mask(player_dino, cactus):
-                    player_dino.is_dead = True
+                            player_goku.is_ducking = False
+            for saibaman in saibamen:
+                saibaman.movement[0] = -1*gamespeed
+                if pygame.sprite.collide_mask(player_goku, saibaman):
+                    player_goku.is_dead = True
                     if pygame.mixer.get_init() is not None:
                         var.die_sound.play()
 
             for energy in energies:
                 energy.movement[0] = -1*gamespeed
-                if pygame.sprite.collide_mask(player_dino, energy):
-                    player_dino.is_dead = True
+                if pygame.sprite.collide_mask(player_goku, energy):
+                    player_goku.is_dead = True
                     if pygame.mixer.get_init() is not None:
                         var.die_sound.play()
 
-            if len(cacti) < 2:
-                if len(cacti) == 0:
+            if len(saibamen) < 2:
+                if len(saibamen) == 0:
                     last_obstacle.empty()
-                    last_obstacle.add(md.Cactus(gamespeed, 42, 44))
+                    last_obstacle.add(md.Saibaman(gamespeed, 42, 44))
                 else:
                     for obstacle in last_obstacle:
                         if obstacle.rect.right < var.width*0.7 and random.randrange(0, 50) == 10:
                             last_obstacle.empty()
-                            last_obstacle.add(md.Cactus(gamespeed, 42, 44))
+                            last_obstacle.add(md.Saibaman(gamespeed, 42, 44))
 
             if len(energies) == 0 and random.randrange(0, 200) == 10 and counter > 500:
                 for obstacle in last_obstacle:
@@ -253,12 +273,12 @@ def gameplay():
             if len(clouds) < 5 and random.randrange(0, 300) == 10:
                 md.Cloud(var.width, random.randrange(var.height/5, var.height/2))
 
-            player_dino.update()
-            cacti.update()
+            player_goku.update()
+            saibamen.update()
             energies.update()
             clouds.update()
             new_ground.update()
-            scb.update(player_dino.score)
+            scb.update(player_goku.score)
             highsc.update(var.HIGH_SCORE)
 
             if pygame.display.get_surface() is not None:
@@ -269,17 +289,17 @@ def gameplay():
                 if var.HIGH_SCORE != 0:
                     highsc.draw()
                     var.screen.blit(hi_image, hi_rect)
-                cacti.draw(var.screen)
+                saibamen.draw(var.screen)
                 energies.draw(var.screen)
-                player_dino.draw()
+                player_goku.draw()
 
                 pygame.display.update()
             var.clock.tick(var.FPS)
 
-            if player_dino.is_dead:
+            if player_goku.is_dead:
                 game_over = True
-                if player_dino.score > var.HIGH_SCORE:
-                    var.HIGH_SCORE = player_dino.score
+                if player_goku.score > var.HIGH_SCORE:
+                    var.HIGH_SCORE = player_goku.score
 
             if counter % 700 == 699:
                 new_ground.speed -= 1
@@ -322,6 +342,9 @@ def gameplay():
 
 
 def main():
+    """
+    Función principal para iniciar el juego.
+    """
     isgame_quit = introscreen()
     if not isgame_quit:
         gameplay()

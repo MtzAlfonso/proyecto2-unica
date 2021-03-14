@@ -1,9 +1,12 @@
 """
+Script que contiene las variables y constantes globales.
+
 Autores:
         - David Hernadez Rivera
         - J. Alfonso Martínez Baeza
         - M. Yvette Santana Sanchez
 """
+
 #importamos el modulo que necesitamos para realizar este juego
 import pygame
 #siempre hacemos una mencion a  init para utilizar la importancion de pygame
